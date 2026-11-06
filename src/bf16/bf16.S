@@ -260,20 +260,6 @@ bf16_sqrt_asm:
         bleu a1, a2, sqloop
 
     sqseg4:
-        li t0, 256
-        bltu a3, t0, sqnorm2
-        srli a3, a3, 1
-        addi t5, t5, 1
-        sqnorm2:
-            li t0, 128
-            bgeu a3, t0, sqrange
-            slli a3, a3, 1
-            addi t5, t5, -1
-        
-        sqrange:
-            bge t5, t6, sqinf
-            blez t5, sq0
-
         slli t5, t5, 7
         andi a3, a3, 0x7f
         or a0, t5, a3
@@ -291,9 +277,6 @@ bf16_sqrt_asm:
     sqret:
         ret
 
-    sqinf:
-        lui a0, 0x8
-        addi a0, a0, -128
-        ret
+
 
     .size   bf16_sqrt_asm, .-bf16_sqrt_asm
