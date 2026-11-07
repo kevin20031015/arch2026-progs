@@ -42,12 +42,12 @@ uint16_t bf16_mul(uint16_t a, uint16_t b)
         } else if ((exp_a == 0) && (mant_a == 0)) {
             return 0x7fc0;
         } else {
-            return (result_sign << 15) | 0x7f80;  // 回傳帶正負號的無限大
+            return (result_sign << 15) | 0x7f80; /* Inf with the product sign */
         }
     }
 
     if (((exp_a == 0) && (mant_a == 0)) || ((exp_b == 0) && (mant_b == 0))) {
-        return (result_sign << 15);  // 回傳帶正負號的 0
+        return (result_sign << 15); /* zero with the product sign */
     }
 
     if (exp_a != 0) {
